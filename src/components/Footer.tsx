@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Facebook, Instagram, Youtube, Twitter, MapPin, Phone, Mail, Brain, Smartphone, Server, Headphones, Sun, Palette, FolderOpen, Users, Briefcase, LifeBuoy, MessageSquare, ShoppingCart } from 'lucide-react'
+import { Facebook, Instagram, Youtube, Twitter, MapPin, Phone, Mail, Brain, Smartphone, Server, Headphones, Sun, Palette, FolderOpen, Users, Briefcase, LifeBuoy, MessageSquare, ShoppingCart, Wifi } from 'lucide-react'
 import HHLogo from './HHLogo'
 
 export default function Footer() {
@@ -41,6 +41,7 @@ export default function Footer() {
               <li><Link to="/services/solar" className="flex items-center gap-2 hover:text-white transition-colors"><Sun size={12} className="text-hh-red shrink-0" />Solar Energy</Link></li>
               <li><Link to="/services/design" className="flex items-center gap-2 hover:text-white transition-colors"><Palette size={12} className="text-hh-red shrink-0" />Design</Link></li>
               <li><Link to="/hardware" className="flex items-center gap-2 hover:text-white transition-colors"><ShoppingCart size={12} className="text-hh-red shrink-0" />Hardware Gallery</Link></li>
+              <li><Link to="/services/network" className="flex items-center gap-2 hover:text-white transition-colors"><Wifi size={12} className="text-hh-red shrink-0" />Network Solutions</Link></li>
             </ul>
           </div>
 

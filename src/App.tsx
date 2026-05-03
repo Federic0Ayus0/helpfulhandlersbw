@@ -28,6 +28,7 @@ import SoftwareService from './pages/services/SoftwareService'
 import ICTService from './pages/services/ICTService'
 import SolarService from './pages/services/SolarService'
 import DesignService from './pages/services/DesignService'
+import NetworkService from './pages/services/NetworkService'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -64,6 +65,7 @@ export default function App() {
         <Route path="/services/ict" element={<Layout><ICTService /></Layout>} />
         <Route path="/services/solar" element={<Layout><SolarService /></Layout>} />
         <Route path="/services/design" element={<Layout><DesignService /></Layout>} />
+        <Route path="/services/network" element={<Layout><NetworkService /></Layout>} />
         {/* App pages */}
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/maintenance" element={<Maintenance />} />

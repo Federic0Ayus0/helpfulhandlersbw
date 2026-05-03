@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
-import { Menu, X, LayoutDashboard, ChevronDown, Brain, Smartphone, Server, Headphones, Sun, Palette, ShoppingCart } from 'lucide-react'
+import { Menu, X, LayoutDashboard, ChevronDown, Brain, Smartphone, Server, Headphones, Sun, Palette, ShoppingCart, Wifi } from 'lucide-react'
 import HHLogo from './HHLogo'
 
 const serviceLinks = [
@@ -11,6 +11,7 @@ const serviceLinks = [
   { label: 'Solar Energy', href: '/services/solar', icon: Sun },
   { label: 'Design', href: '/services/design', icon: Palette },
   { label: 'Hardware Gallery', href: '/hardware', icon: ShoppingCart },
+  { label: 'Network Solutions', href: '/services/network', icon: Wifi },
 ]
 
 export default function Navbar() {
