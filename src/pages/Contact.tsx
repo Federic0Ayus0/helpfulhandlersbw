@@ -1,15 +1,12 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Send, MapPin, Phone, Mail, Calendar, Clock } from 'lucide-react'
 import GlassCard from '../components/GlassCard'
-import emailjs from '@emailjs/browser'
 
 const labPhotos = ['/images/lab-1.jpg', '/images/lab-2.jpg', '/images/lab-3.jpg']
 
 export default function Contact() {
   const navigate = useNavigate()
-  const formRef = useRef<HTMLFormElement>(null)
-  const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({ 
     name: '', 
     email: '', 
@@ -23,29 +20,16 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setLoading(true)
     
-    if (formRef.current) {
-      const serviceID = 'service_4a9j74a'
-      const templateID = 'template_oay94qj'
-      const publicKey = 'j6_S_7w2L5S7OQ9kC'
-
-      emailjs.sendForm(serviceID, templateID, formRef.current, publicKey)
-        .then(() => {
-          setLoading(false)
-          const displayData = {
-            ...form,
-            brief: form.type === 'call' 
-              ? `Call Scheduled: ${form.date} at ${form.time}. Subject: ${form.subject}` 
-              : form.message
-          }
-          console.log('Contact form submitted via EmailJS:', displayData)
-          navigate('/thank-you', { state: { formData: displayData } })
-        }, (err) => {
-          setLoading(false)
-          alert('Send failed: ' + JSON.stringify(err))
-        })
+    const displayData = {
+      ...form,
+      brief: form.type === 'call' 
+        ? `Call Scheduled: ${form.date} at ${form.time}. Subject: ${form.subject}` 
+        : form.message
     }
+
+    console.log('Contact form submitted:', displayData)
+    navigate('/success', { state: { formData: displayData } })
   }
 
   return (
@@ -79,15 +63,9 @@ export default function Contact() {
               </button>
             </div>
 
-            <form id="contact-form" ref={formRef} onSubmit={handleSubmit} className="space-y-4">
-              <input 
-                type="hidden" 
-                name="message" 
-                value={form.type === 'call' ? `Call Scheduled: ${form.date} at ${form.time}. Subject: ${form.subject}` : form.message} 
-              />
+            <form onSubmit={handleSubmit} className="space-y-4">
               <input 
                 type="text" 
-                name="user_name"
                 placeholder="Full Name" 
                 className="input-dark w-full" 
                 required
@@ -96,7 +74,6 @@ export default function Contact() {
               />
               <input 
                 type="email" 
-                name="user_email"
                 placeholder="Email Address" 
                 className="input-dark w-full" 
                 required
@@ -105,7 +82,6 @@ export default function Contact() {
               />
               <input 
                 type="tel" 
-                name="user_phone"
                 placeholder="Phone Number (e.g. +267 74 170 800)" 
                 className="input-dark w-full" 
                 required
@@ -116,14 +92,12 @@ export default function Contact() {
                 <>
                   <input 
                     type="date" 
-                    name="date"
                     className="input-dark w-full text-white/50" 
                     required
                     value={form.date}
                     onChange={(e) => setForm({ ...form, date: e.target.value })}
                   />
                   <select 
-                    name="time"
                     className="input-dark w-full"
                     value={form.time}
                     onChange={(e) => setForm({ ...form, time: e.target.value })}
@@ -134,7 +108,6 @@ export default function Contact() {
                   </select>
                   <input 
                     type="text" 
-                    name="subject"
                     placeholder="What's the call about?" 
                     className="input-dark w-full" 
                     required
@@ -144,7 +117,6 @@ export default function Contact() {
                 </>
               ) : (
                 <textarea 
-                  name="message_original"
                   placeholder="Your message..." 
                   rows={4} 
                   className="input-dark w-full resize-none" 
@@ -153,12 +125,8 @@ export default function Contact() {
                   onChange={(e) => setForm({ ...form, message: e.target.value })} 
                 />
               )}
-              <button 
-                type="submit" 
-                disabled={loading}
-                className="btn-primary w-full gap-2 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {loading ? "Sending..." : (form.type === 'call' ? <><Calendar size={16} /> Book Call</> : <><Send size={16} /> Send Message</>)}
+              <button type="submit" className="btn-primary w-full gap-2 flex items-center justify-center">
+                {form.type === 'call' ? <><Calendar size={16} /> Book Call</> : <><Send size={16} /> Send Message</>}
               </button>
             </form>
           </GlassCard>

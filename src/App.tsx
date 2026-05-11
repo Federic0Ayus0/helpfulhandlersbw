@@ -74,7 +74,6 @@ export default function App() {
         <Route path="/chat" element={<Chat />} />
         <Route path="/quote" element={<Quote />} />
         <Route path="/success" element={<Success />} />
-        <Route path="/thank-you" element={<Success />} />
         <Route path="/certificate" element={<Certificate />} />
         <Route path="/warranty" element={<Warranty />} />
         <Route path="/milestone" element={<Milestone />} />
